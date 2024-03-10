@@ -1,7 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  console.log(to)
   const token = useCookie("token");
 
   const { role } = token.value ? jwtDecode(token.value) : "";
