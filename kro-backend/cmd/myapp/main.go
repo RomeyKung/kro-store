@@ -44,7 +44,7 @@ func main() {
 	router := gin.Default()
 
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://54.197.36.90/"}
+	config.AllowOrigins = []string{"http://3.87.34.50/"}
 	config.AllowMethods = []string{"GET", "POST", "OPTIONS", "PATCH", "DELETE", "PUT"}
 	config.AllowHeaders = []string{"Authorization", "Content-Type"}
 
