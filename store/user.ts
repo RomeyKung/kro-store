@@ -57,6 +57,7 @@ export const useAuth = defineStore('auth', {
         }
         navigateTo({ path: '/' })
       } catch (error) {
+        alert("login fail");
         console.log(error)
       }
     },
@@ -85,6 +86,7 @@ export const useAuth = defineStore('auth', {
         }
       } catch (error) {
         console.error('Registration failed:', error);
+        alert("register fail");
         return error
       }
     },
