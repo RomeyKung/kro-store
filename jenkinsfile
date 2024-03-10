@@ -29,8 +29,6 @@ pipeline {
                 sh 'echo "OMISE_PUBLIC_KEY=pkey_test_5yy91xv84zjnnitvdw0" > kro-backend/.env'
                 sh 'echo "OMISE_SECRET_KEY=skey_test_5wmco0oh1cfnliaoszv" >> kro-backend/.env'
                 sh 'echo "SECRET_KEY=s_kroKey_back_i2tpohbojgagageq3u4ihryh" >> kro-backend/.env'
-                sh 'echo "DYNAMO_ACCESSKEY=1cqeve" >> kro-backend/.env'
-                sh 'echo "DYNAMO_SECRETACCESSKEY=xfpz7n" >> kro-backend/.env'
                 sh 'docker compose -f "docker-compose.yml" up -d --build'
             }
         }
