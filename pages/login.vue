@@ -69,7 +69,6 @@ const handleLogin = async () => {
     auth.login(email.value, password.value);    
   } catch (error) {
     console.error('Login failed:', error.message);
-    alert("login fail");
   }
 };
 definePageMeta({
