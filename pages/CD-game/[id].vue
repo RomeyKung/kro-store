@@ -29,7 +29,7 @@
           {{ product.description }}
         </div>
         <div class="mt-10 md:text-2xl">Price : {{ product.price }} ฿</div>
-        <div class="mt-5">Available on PS4 PS5</div>
+        <div class="mt-5">Available on <b v-for="(supDevice) in product.supDevice" :key="supDevice.Id">{{ supDevice }}</b></div>
         <div class="w-64 mt-10">
           <Carousel :autoplay="4000" :wrap-around="true" :transition="900">
             <Slide v-for="slide in product.images" :key="slide">
@@ -52,7 +52,7 @@
         >
           <div class="flex items-center justify-center">
             <img src="~/assets/add-to-basket.png" width="32" height="32" />
-            <p class="ml-2">Add to Cart</p>
+            <a @click="addToCart()" class="ml-2">Add to Cart</a>
           </div>
         </button>
       </div>
@@ -64,7 +64,7 @@
       <div class="mt-10">{{ product.provider }}</div>
       <div class="text-sm">{{ product.description }}</div>
       <div class="mt-10 md:text-2xl">Price : {{ product.price }} ฿</div>
-      <div class="mt-5 font-bold">Available on PS4 PS5</div>
+      <div class="mt-5 font-bold">Available on <b v-for="(supDevice) in product.supDevice" :key="supDevice.Id">{{ supDevice }}</b></div>
       <div class="w-64 mx-auto m-10">
         <!-- Added mx-auto class -->
         <Carousel :autoplay="4000" :wrap-around="true" :transition="900">
@@ -84,7 +84,7 @@
       >
         <div class="flex items-center justify-center">
           <img src="~/assets/add-to-basket.png" width="32" height="32" />
-          <p class="ml-2">Add to Cart</p>
+          <a @click="addToCart()" class="ml-2">Add to Cart</a>
         </div>
       </button>
     </div>
@@ -96,6 +96,8 @@ import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "~/store/cart";
 import { useGameStore } from "~/store/game";
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+
 const route = useRoute();
 const gameStore = useGameStore();
 const id = route.params.id;
@@ -117,9 +119,8 @@ onMounted(async () => {
   });
 });
 
-const addToCart = (product) => {
-  cartStore.add(product);
-  s;
+const addToCart = () => {
+  cartStore.add(product.value)
 };
 </script>
 <style>

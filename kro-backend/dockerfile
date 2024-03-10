@@ -1,15 +1,13 @@
-FROM golang:latest
+FROM node:latest
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY ./cmd/myapp .
+COPY package*.json ./
 
-copy go.mod go.sum .
+RUN npm install
 
-COPY ./internal ./internal
+COPY . .
 
-RUN go build -o kro-backend .
+EXPOSE 3001
 
-EXPOSE 8060
-
-CMD ["./kro-backend"]
+CMD ["node", "server.js"]

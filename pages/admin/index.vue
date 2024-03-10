@@ -21,7 +21,7 @@
               >
             </div>
             <div
-              @click="selectedSide = 'productList', fetchProduct()"
+              @click="selectedSide = 'productList'"
               class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
             >
               <ListBulletIcon class="h-6 w-6" aria-hidden="true" />
@@ -73,7 +73,11 @@
           <tr v-for="item in products" :key="item.Id">
             <td class="font-['kanit'] border px-4 py-2">{{ item.Id }}</td>
             <td class="font-['kanit'] border px-4 py-2">
-              <img :src="item.images[0]" alt="" class="h-16 w-16 object-cover" />
+              <img
+                :src="item.images[0]"
+                alt=""
+                class="h-16 w-16 object-cover"
+              />
             </td>
             <td class="font-['kanit'] border px-4 py-2">{{ item.name }}</td>
             <td class="font-['kanit'] border px-4 py-2">
@@ -82,9 +86,15 @@
             <td class="font-['kanit'] border px-4 py-2">{{ item.type }}</td>
 
             <template v-if="(item.type = 'game')">
-              <td class="font-['kanit'] border px-4 py-2">{{ item.genre }}</td>
               <td class="font-['kanit'] border px-4 py-2">
-                {{ item.supDevice }}
+                <ul v-for="(genre, index) in item.genre" :key="index">
+                  <li>{{ genre }}</li>
+                </ul>
+              </td>
+              <td class="font-['kanit'] border px-4 py-2">
+                <ul v-for="(supDevice, index) in item.supDevice" :key="index">
+                  <li>{{ supDevice }}</li>
+                </ul>
               </td>
             </template>
 
@@ -94,7 +104,9 @@
               {{ item.releaseDate }}
             </td>
             <td class="font-['kanit'] border px-4 py-2">
-              <PencilSquareIcon class="h-6 w-6" aria-hidden="true" />
+              <button @click="editProduct(item)">
+                <PencilSquareIcon class="h-6 w-6" aria-hidden="true" />
+              </button>
             </td>
             <td class="font-['kanit'] border px-4 py-2">
               <button>
@@ -109,7 +121,6 @@
         </tbody>
       </table>
       <div v-if="selectedSide == 'addProduct'">
-        {{products}}
         <div class="m-10 flex flex-col space-y-4">
           <div>
             <label class="text-lg font-['kanit'] text-gray-500"
@@ -249,7 +260,12 @@
             </div>
           </div>
         </div>
-        <button @click="addProduct()">เพิ่มสินค้า</button>
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          @click="addProduct()"
+        >
+          เพิ่มสินค้า
+        </button>
         {{ newProduct }}
       </div>
       <table v-if="selectedSide == 'orderList'">
@@ -264,13 +280,12 @@
             <th class="font-['kanit'] border px-4 py-2">วันที่สั่งซื้อ</th>
             <th class="font-['kanit'] border px-4 py-2">ที่อยู่</th>
             <th class="font-['kanit'] border px-4 py-2">แก้ไข</th>
-            <th class="font-['kanit'] border px-4 py-2">ลบ</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in groupedData" :key="item.productId">
             <td class="font-['kanit'] border px-4 py-2">{{ item.orderId }}</td>
-            <td class="font-['kanit'] border px-4 py-2">{{ item.customer }}</td>
+            <td class="font-['kanit'] border px-4 py-2">{{ item.email }}</td>
             <td class="font-['kanit'] border px-4 py-2">{{ item.detail }}</td>
             <td class="font-['kanit'] border px-4 py-2">
               {{ item.totalPrice }}
@@ -284,10 +299,9 @@
             </td>
             <td class="font-['kanit'] border px-4 py-2">{{ item.address }}</td>
             <td class="font-['kanit'] border px-4 py-2">
-              <PencilSquareIcon class="h-6 w-6" aria-hidden="true" />
-            </td>
-            <td class="font-['kanit'] border px-4 py-2">
-              <TrashIcon class="h-6 w-6" aria-hidden="true" />
+              <button @click="editOrder(item)">
+                <PencilSquareIcon class="h-6 w-6" aria-hidden="true" />
+              </button>
             </td>
           </tr>
         </tbody>
@@ -295,28 +309,19 @@
       <table v-if="selectedSide == 'userList'">
         <thead>
           <tr class="sticky top-0 bg-white">
-            <th class="font-['kanit'] border px-4 py-2">User Id</th>
+            <th class="font-['kanit'] border px-4 py-2">อีเมล</th>
             <th class="font-['kanit'] border px-4 py-2">รป</th>
             <th class="font-['kanit'] border px-4 py-2">ชื่อจริง</th>
-            <th class="font-['kanit'] border px-4 py-2">อีเมล</th>
             <th class="font-['kanit'] border px-4 py-2">ที่อยู่</th>
-            <th class="font-['kanit'] border px-4 py-2">เบอร์โทรศัพท์</th>
-            <th class="font-['kanit'] border px-4 py-2">ลบ</th>
           </tr>
         </thead>
         <tbody>
-          <!-- <tr v-for="item in productStore.products" :key="item.productId">
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.userId }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.image }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.fullname }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.email }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.address }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.phoneNumebr }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">{{ item.shippingMethod }}</td>
-                        <td class="font-['kanit'] border px-4 py-2">
-                            <TrashIcon class="h-6 w-6" aria-hidden="true" />
-                        </td>
-                    </tr> -->
+          <tr v-for="user in users" :key="user.email">
+            <td class="font-['kanit'] border px-4 py-2">{{ user.email }}</td>
+            <td class="font-['kanit'] border px-4 py-2">{{ user.imageProfile }}</td>
+            <td class="font-['kanit'] border px-4 py-2">{{ user.fullName }}</td>
+            <td class="font-['kanit'] border px-4 py-2">{{ user.address }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -333,6 +338,8 @@ import {
   TruckIcon,
 } from "@heroicons/vue/24/outline";
 import { useAuth } from "~/store/user";
+import Swal from "sweetalert2";
+
 const authStore = useAuth();
 const config = useRuntimeConfig();
 const selectedSide = ref(null);
@@ -422,7 +429,7 @@ const groupedData = computed(() => {
         orderDate: order.orderDate,
         shippingMethod: order.shippingMethod,
         totalPrice: 0,
-        customer: order.email,
+        email: order.email,
         detail: [],
         status: order.status,
         address: order.shippingAddress,
@@ -434,11 +441,12 @@ const groupedData = computed(() => {
     acc[key].detail.push({
       productId: order.productId,
       quantity: order.quantity,
-      customerId: order.customerId,
+      email: order.email,
       status: order.status,
       subtotal: order.subtotal,
       shippingAddress: order.shippingAddress,
       type: order.type,
+      orderDate: order.orderDate,
     });
 
     return acc;
@@ -463,7 +471,7 @@ const addProduct = async () => {
           method: "POST",
           body: newProduct.value,
         });
-        fetchProduct()
+        fetchProduct();
       } catch (error) {
         console.log(error.message);
       }
@@ -473,7 +481,7 @@ const addProduct = async () => {
           method: "POST",
           body: newProduct.value,
         });
-        fetchProduct()
+        fetchProduct();
       } catch (error) {
         console.log(error.message);
       }
@@ -519,8 +527,7 @@ const fetchProduct = async () => {
     });
     if (games == null) {
       games = [];
-    }
-    else if (consoles == null) {
+    } else if (consoles == null) {
       consoles = [];
     }
     games = games.map((item) => ({
@@ -533,11 +540,124 @@ const fetchProduct = async () => {
     }));
 
     products.value = [...games, ...consoles];
-    console.log(products.value)
+    // console.log(products.value);
   } catch (error) {
     console.log(error.message);
   }
 };
+
+const users = ref([]);
+const fetchAllUser = async () => {
+  try {
+    users.value = await $api("users/alluser", {
+      method: "GET",
+    });
+    console.log(users.value)
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const editProduct = async (data) => {
+  const { value: formValues } = await Swal.fire({
+    title: "Edit Product",
+    html: `
+    <div style="flex">
+      <Label>ราคา</Label>
+      <input id="Price" class="swal2-input">
+    </div>
+    <div>
+      <Label>คงเหลือ</Label>
+      <input id="Stock" class="swal2-input">
+    </div>
+  `,
+    focusConfirm: false,
+    preConfirm: () => {
+      return [
+        document.getElementById("Price").value,
+        document.getElementById("Stock").value,
+      ];
+    },
+  });
+  if (formValues) {
+    try {
+      await $api(
+        data.type +
+          "s/updateGame/" +
+          "updateOrder" +
+          data.type.charAt(0).toUpperCase(),
+        {
+          method: "PUT",
+          body: {
+            ...data,
+            stock: parseInt(formValues[1]),
+            price: parseFloat(formValues[0]),
+          },
+        }
+      );
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Product edit success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      fetchProduct();
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        icon: "error",
+      });
+    }
+  }
+};
+
+const editOrder = async (data) => {
+  const { value: formValues } = await Swal.fire({
+    title: "Edit Product",
+    showCancelButton: true,
+    html: `
+      <select id="status">
+        <option value="pending">pending</option>
+        <option value="shipping">shipping</option>
+        <option value="success">success</option>
+      </select>
+  `,
+    focusConfirm: false,
+    preConfirm: () => {
+      return [document.getElementById("status").value];
+    },
+  });
+  if (formValues) {
+    try {
+      await $api("orders/" + "updateOrder", {
+        method: "PUT",
+        body: {
+          ...data,
+          status: formValues[0],
+        },
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Product edit success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      fetchAllOrder();
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        icon: "error",
+      });
+    }
+  }
+};
+
 fetchProduct();
 fetchAllOrder();
+fetchAllUser();
+
+definePageMeta({
+  layout: "admin",
+});
 </script>

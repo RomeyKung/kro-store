@@ -14,15 +14,16 @@ interface User {
   email: string;
   password: string;
   phoneNumber: string;
-  imageProfile: [];
+  imageProfile: string[];
   address: Address;
+  role: string;
 }
 
 interface Address {
   address: string;
   province: string;
   district: string;
-  subdistrict: string;
+  subDistrict: string;
   postalcode: string;
 }
 
@@ -34,7 +35,8 @@ export const useAuth = defineStore('auth', {
   }),
 
   getters: {
-    isAuthenticated: (state) => !!state.token
+    isAuthenticated: (state) => !!state.token,
+    isAdmin: (state) => state.user.role
   },
 
   actions: {
@@ -48,6 +50,8 @@ export const useAuth = defineStore('auth', {
             password: password,
           },
         });
+        const token = useCookie('token');
+        token.value = this.token; 
         if (this.token){
           this.fetchUser()
         }
@@ -68,18 +72,25 @@ export const useAuth = defineStore('auth', {
               address: address.address, 
               province: address.province,
               district: address.district,
-              subDistrict: address.subdistrict,
+              subDistrict: address.subDistrict,
               postalCode: address.postalcode
             }
           },
         });
-        this.fetchUser();
+        const token = useCookie('token');
+        token.value = this.token; 
+        if (this.token){
+          this.fetchUser()
+          navigateTo("/")
+        }
       } catch (error) {
         console.error('Registration failed:', error);
         return error
       }
     },
     async logout() {
+      const token = useCookie('token');
+      token.value = null;
       this.$reset();
     },
 
