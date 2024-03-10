@@ -174,6 +174,14 @@
                     id="user-menu-item-0"
                     >Your Profile</nuxt-link
                   >
+                  <nuxt-link
+                    to="/profile/order"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-700"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="user-menu-item-0"
+                    >Order</nuxt-link
+                  >
                   <button
                     @click="authStore.logout()"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-700 w-full text-left"
