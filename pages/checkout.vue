@@ -288,6 +288,10 @@ const checkingCard = async () => {
         ExpirationYear: 2029,
         cvc: "123",
       },
+      headers: {
+      "Content-Type": 'application/json',
+      "Authorization": "bearer " + token.value
+      }
     });
     isCheckingCredit.value = true;
     Swal.fire({
