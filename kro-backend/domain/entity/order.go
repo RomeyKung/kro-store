@@ -1,9 +1,5 @@
 package entity
 
-import (
-	"time"
-)
-
 type Order struct {
 	OrderId         string    `json:"orderId"`
 	ProductId       string    `json:"productId"`
