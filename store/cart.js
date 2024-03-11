@@ -33,6 +33,9 @@ export const useCartStore = defineStore("cart", {
     increaseQuantity(id) {
       const index = this.cart.findIndex((i) => i.Id === id);
       this.cart[index].quantity += 1;
+    },
+    clearCart(){
+      this.cart = [];
     }
   
     

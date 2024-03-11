@@ -306,6 +306,7 @@ const checkingCard = async () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         payment(orders);
+        
       }
     });
   } catch (error) {
@@ -327,7 +328,10 @@ const payment = async (orders) => {
       title: "Success!",
       text: "Your view order in order page.",
       icon: "success",
-    });
+    }).then(() => {
+      cartStore.clearCart();
+    
+    })
   } catch (error) {
     console.log(error);
   }
