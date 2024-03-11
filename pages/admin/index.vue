@@ -60,8 +60,8 @@
             <th class="font-['kanit'] border px-4 py-2">ชื่อสินค้า</th>
             <th class="font-['kanit'] border px-4 py-2">รายละเอียดสินค้า</th>
             <th class="font-['kanit'] border px-4 py-2">ประเภท</th>
-            <th class="font-['kanit'] border px-4 py-2">เครื่องที่รองรับ</th>
             <th class="font-['kanit'] border px-4 py-2">เเนวเกม</th>
+            <th class="font-['kanit'] border px-4 py-2">เครื่องที่รองรับ</th>
             <th class="font-['kanit'] border px-4 py-2">ราคา</th>
             <th class="font-['kanit'] border px-4 py-2">คงเหลือ</th>
             <th class="font-['kanit'] border px-4 py-2">วันที่วางขาย</th>
