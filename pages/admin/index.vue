@@ -492,7 +492,7 @@ const editProduct = async (data) => {
   if (formValues) {
     try {
       await $api(
-        data.type + "s/update/" + data.type.charAt(0).toUpperCase() + data.type.slice(1),
+        data.type + "s/update" + data.type.charAt(0).toUpperCase() + data.type.slice(1),
         {
           method: "PUT",
           body: {
