@@ -3,6 +3,7 @@ package dynamoDb
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/Kenmuraki5/kro-backend.git/domain/entity"
 	"github.com/Kenmuraki5/kro-backend.git/domain/restmodel"
@@ -74,6 +75,7 @@ func (repo *DynamoDBOrderRepository) GetOrdersByEmail(email string) ([]*entity.O
 func (repo *DynamoDBOrderRepository) AddOrders(orders []restmodel.Order, orderId string) ([]*restmodel.Order, error) {
 	var addedOrders []*restmodel.Order
 	var writeRequests []types.WriteRequest
+	currentTime := time.Now().Format(time.DateTime)
 	for _, order := range orders {
 
 		entityOrder := entity.Order{
@@ -81,7 +83,7 @@ func (repo *DynamoDBOrderRepository) AddOrders(orders []restmodel.Order, orderId
 			ProductId:       order.ProductId,
 			Quantity:        order.Quantity,
 			Email:           order.Email,
-			OrderDate:       order.OrderDate,
+			OrderDate:       currentTime,
 			Status:          "Pending",
 			Subtotal:        order.Subtotal,
 			ShippingAddress: order.ShippingAddress,
