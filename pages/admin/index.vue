@@ -44,7 +44,7 @@
             >
               <UserGroupIcon class="h-6 w-6" aria-hidden="true" />
               <span class="mx-2 text-sm font-['kanit'] font-medium"
-                >รายชื้อผู้ใช้</span
+                >รายชื่อผู้ใช้</span
               >
             </div>
           </div>
@@ -457,7 +457,7 @@ const products = ref([]);
 const addProduct = async () => {
   try {
     const config = useRuntimeConfig();
-    const response = await $api("s3/upload-image", {
+    const response = await $fetch(config.public.baseURL + "/s3/upload-image", {
       body: formData,
       header: {
         "Content-Type": "multipart/form-data",

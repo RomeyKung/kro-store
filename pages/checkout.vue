@@ -181,20 +181,20 @@
           </div>
           <input type="text" id="District" name="District"
             class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-            placeholder="เเขวง/ตำบล" v-model="billingSubDistrict" />
+            placeholder="SubDistrict" v-model="billingSubDistrict" />
         </div>
         <div class="flex flex-col sm:flex-row">
           <div class="relative flex-shrink-0 sm:w-1/3">
             <input type="text" id="subDistrict" name="subDistrict"
               class="w-full rounded-md border border-gray-200 px-4 py-3 pl-5 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-              placeholder="เขต" v-model="billingDistrict" />
+              placeholder="District" v-model="billingDistrict" />
           </div>
           <input type="text" id="Province" name="Province"
             class="w-full rounded-md border border-gray-200 px-4 py-3 pl-5 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-            placeholder="จังหวัด" v-model="billingProvince" />
+            placeholder="Province" v-model="billingProvince" />
           <input type="text" name="PostalCode"
             class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/5 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-            placeholder="รหัสไปราณีย์" v-model="billingZip" />
+            placeholder="Postal-Code" v-model="billingZip" />
         </div>
 
         <!-- Total -->
