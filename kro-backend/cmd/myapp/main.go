@@ -51,7 +51,7 @@ func main() {
 	router.Use(cors.New(config))
 
 	//S3
-	router.POST("/s3/upload-image", s3.S3uploader)
+	router.POST("/api/s3/upload-image", s3.S3uploader)
 
 	gameController.SetupRoutes(router)
 	orderController.SetupRoutes(router)
