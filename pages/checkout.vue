@@ -254,6 +254,7 @@ const tokenpayment = ref("");
 const isCheckingCredit = ref(false);
 const isCheckingPayment = ref(false);
 const { $api } = useNuxtApp();
+const token = useCookie("token");
 
 const checkingCard = async () => {
   const address =
