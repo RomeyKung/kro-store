@@ -52,7 +52,7 @@
         >
           <div class="flex items-center justify-center">
             <img src="~/assets/add-to-basket.png" width="32" height="32" />
-            <a @click="addToCart()" class="ml-2">Add to Cart</a>
+            <button @click="addToCart()" class="ml-2">Add to Cart</button>
           </div>
         </button>
       </div>
