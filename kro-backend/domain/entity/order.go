@@ -9,7 +9,7 @@ type Order struct {
 	ProductId       string    `json:"productId"`
 	Quantity        int       `json:"quantity"`
 	Email           string    `json:"email"`
-	OrderDate       time.Time `json:"orderDate"`
+	OrderDate       string    `json:"orderDate"`
 	Status          string    `json:"status"`
 	Subtotal        float64   `json:"subtotal"`
 	ShippingAddress string    `json:"shippingAddress"`
