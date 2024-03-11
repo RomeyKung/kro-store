@@ -270,7 +270,7 @@ const checkingCard = async () => {
     return {
       ProductId: item.Id,
       Quantity: item.quantity,
-      Email: email.value,
+      Email: authStore.user.email,
       OrderDate: "2024-02-29T12:34:56Z",
       ShippingAddress: address,
       ShippingMethod: shippingMethod.value,
