@@ -493,8 +493,7 @@ const editProduct = async (data) => {
     try {
       await $api(
         data.type +
-        "s/updateGame/" +
-        "updateOrder" +
+        "s/updateGame",
         data.type.charAt(0).toUpperCase(),
         {
           method: "PUT",
