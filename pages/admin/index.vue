@@ -1,51 +1,31 @@
 <template>
   <div class="flex h-fit">
     <aside
-      class="flex flex-col min-w-40 w-40 h-screen min-h-screen px-5 py-8 bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700"
-    >
+      class="flex flex-col min-w-40 w-40 h-screen min-h-screen px-5 py-8 bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
       <div class="flex flex-col justify-between flex-1 mt-6">
         <nav class="-mx-3 space-y-6">
           <div class="space-y-3">
-            <label
-              class="px-3 text-xs text-gray-500 font-['kanit'] uppercase dark:text-gray-400"
-              >Admin Page</label
-            >
+            <label class="px-3 text-xs text-gray-500 font-['kanit'] uppercase dark:text-gray-400">Admin Page</label>
 
-            <div
-              @click="selectedSide = 'addProduct'"
-              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-            >
+            <div @click="selectedSide = 'addProduct'"
+              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
               <PlusCircleIcon class="h-6 w-6" aria-hidden="true" />
-              <span class="mx-2 text-sm font-['kanit'] font-medium"
-                >เพิ่มสินค้า</span
-              >
+              <span class="mx-2 text-sm font-['kanit'] font-medium">เพิ่มสินค้า</span>
             </div>
-            <div
-              @click="selectedSide = 'productList'"
-              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-            >
+            <div @click="selectedSide = 'productList'"
+              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
               <ListBulletIcon class="h-6 w-6" aria-hidden="true" />
-              <span class="mx-2 text-sm font-['kanit'] font-medium"
-                >รายการสินค้า</span
-              >
+              <span class="mx-2 text-sm font-['kanit'] font-medium">รายการสินค้า</span>
             </div>
-            <div
-              @click="selectedSide = 'orderList'"
-              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-            >
+            <div @click="selectedSide = 'orderList'"
+              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
               <TruckIcon class="h-6 w-6" aria-hidden="true" />
-              <span class="mx-2 text-sm font-['kanit'] font-medium"
-                >รายการสั่งซื้อ</span
-              >
+              <span class="mx-2 text-sm font-['kanit'] font-medium">รายการสั่งซื้อ</span>
             </div>
-            <div
-              @click="selectedSide = 'userList'"
-              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-            >
+            <div @click="selectedSide = 'userList'"
+              class="flex items-center px-3 py-2 text-gray-600 font-['kanit'] transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
               <UserGroupIcon class="h-6 w-6" aria-hidden="true" />
-              <span class="mx-2 text-sm font-['kanit'] font-medium"
-                >รายชื้อผู้ใช้</span
-              >
+              <span class="mx-2 text-sm font-['kanit'] font-medium">รายชื่อผู้ใช้</span>
             </div>
           </div>
         </nav>
@@ -73,11 +53,7 @@
           <tr v-for="item in products" :key="item.Id">
             <td class="font-['kanit'] border px-4 py-2">{{ item.Id }}</td>
             <td class="font-['kanit'] border px-4 py-2">
-              <img
-                :src="item.images[0]"
-                alt=""
-                class="h-16 w-16 object-cover"
-              />
+              <img :src="item.images[0]" alt="" class="h-16 w-16 object-cover" />
             </td>
             <td class="font-['kanit'] border px-4 py-2">{{ item.name }}</td>
             <td class="font-['kanit'] border px-4 py-2">
@@ -110,11 +86,7 @@
             </td>
             <td class="font-['kanit'] border px-4 py-2">
               <button>
-                <TrashIcon
-                  @click="deleteProductById(item.type, item.Id)"
-                  class="h-6 w-6"
-                  aria-hidden="true"
-                />
+                <TrashIcon @click="deleteProductById(item.type, item.Id)" class="h-6 w-6" aria-hidden="true" />
               </button>
             </td>
           </tr>
@@ -123,39 +95,19 @@
       <div v-if="selectedSide == 'addProduct'">
         <div class="m-10 flex flex-col space-y-4">
           <div>
-            <label class="text-lg font-['kanit'] text-gray-500"
-              >ชื่อสินค้า</label
-            >
-            <input
-              id="name"
-              name="name"
-              v-model="newProduct.name"
-              class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-            />
+            <label class="text-lg font-['kanit'] text-gray-500">ชื่อสินค้า</label>
+            <input id="name" name="name" v-model="newProduct.name"
+              class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300" />
           </div>
           <div class="relative">
-            <label
-              for="description"
-              class="text-lg font-['kanit'] text-gray-500 mt-5"
-              >รายละเอียดสินค้า</label
-            >
-            <textarea
-              id="description"
-              name="description"
-              v-model="newProduct.description"
-              class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-            />
+            <label for="description" class="text-lg font-['kanit'] text-gray-500 mt-5">รายละเอียดสินค้า</label>
+            <textarea id="description" name="description" v-model="newProduct.description"
+              class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300" />
           </div>
           <div>
-            <label for="type" class="text-lg font-['kanit'] text-gray-500"
-              >ประเภท</label
-            >
-            <select
-              v-model="newProduct.type"
-              name="type"
-              id="type"
-              class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-            >
+            <label for="type" class="text-lg font-['kanit'] text-gray-500">ประเภท</label>
+            <select v-model="newProduct.type" name="type" id="type"
+              class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300">
               <option value="" selected disabled>ประเภท</option>
               <option value="Game">เกม</option>
               <option value="Console">เครื่องคอนโซล</option>
@@ -164,42 +116,21 @@
 
           <div v-if="newProduct.type == 'Game'" class="mr-6 flex flex-wrap">
             <div class="mr-5 flex flex-col">
-              <label for="price" class="text-lg font-['kanit'] text-gray-500"
-                >เเนวเกม</label
-              >
-              <select
-                v-model="newProduct.genre"
-                data-placeholder="Begin typing a name to filter..."
-                multiple
+              <label for="price" class="text-lg font-['kanit'] text-gray-500">เเนวเกม</label>
+              <select v-model="newProduct.genre" data-placeholder="Begin typing a name to filter..." multiple
                 class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-                name="test"
-              >
-                <option
-                  v-for="item in genre.options"
-                  :key="item.value"
-                  :value="item.value"
-                >
+                name="test">
+                <option v-for="item in genre.options" :key="item.value" :value="item.value">
                   {{ item.value }}
                 </option>
               </select>
             </div>
             <div class="mr-5">
-              <label for="stock" class="text-lg font-['kanit'] text-gray-500"
-                >เครื่องที่รองรับ</label
-              >
-              <select
-                v-model="newProduct.supDevice"
-                name="type"
-                id="type"
-                data-placeholder="Begin typing a name to filter..."
-                multiple
-                class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-              >
-                <option
-                  v-for="item in supDevice.options"
-                  :key="item.value"
-                  :value="item.value"
-                >
+              <label for="stock" class="text-lg font-['kanit'] text-gray-500">เครื่องที่รองรับ</label>
+              <select v-model="newProduct.supDevice" name="type" id="type"
+                data-placeholder="Begin typing a name to filter..." multiple
+                class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300">
+                <option v-for="item in supDevice.options" :key="item.value" :value="item.value">
                   {{ item.value }}
                 </option>
               </select>
@@ -207,63 +138,28 @@
           </div>
           <div class="mr-6 flex flex-wrap">
             <div class="mr-5">
-              <label for="price" class="text-lg font-['kanit'] text-gray-500"
-                >เเบรนด์</label
-              >
-              <input
-                id="price"
-                name="price"
-                type="text"
-                v-model="newProduct.brand"
-                class="block w-64 rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-              />
+              <label for="price" class="text-lg font-['kanit'] text-gray-500">เเบรนด์</label>
+              <input id="price" name="price" type="text" v-model="newProduct.brand"
+                class="block w-64 rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300" />
             </div>
             <div class="mr-5">
-              <label for="price" class="text-lg font-['kanit'] text-gray-500"
-                >ราคา</label
-              >
-              <input
-                id="price"
-                name="price"
-                type="number"
-                placeholder="100"
-                v-model="newProduct.price"
-                class="block w-32 rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-              />
+              <label for="price" class="text-lg font-['kanit'] text-gray-500">ราคา</label>
+              <input id="price" name="price" type="number" placeholder="100" v-model="newProduct.price"
+                class="block w-32 rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300" />
             </div>
             <div class="mr-5">
-              <label for="stock" class="text-lg font-['kanit'] text-gray-500"
-                >จำนวน</label
-              >
-              <input
-                id="stock"
-                name="stock"
-                type="number"
-                placeholder="25"
-                v-model="newProduct.stock"
-                class="block w-32 rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-              />
+              <label for="stock" class="text-lg font-['kanit'] text-gray-500">จำนวน</label>
+              <input id="stock" name="stock" type="number" placeholder="25" v-model="newProduct.stock"
+                class="block w-32 rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300" />
             </div>
             <div class="mr-6 flex flex-col">
-              <label for="images" class="text-lg font-['kanit'] text-gray-500"
-                >Upload Images</label
-              >
-              <input
-                id="images"
-                name="images"
-                type="file"
-                accept="image/*"
-                multiple
-                @change="onFileChange"
-                class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300"
-              />
+              <label for="images" class="text-lg font-['kanit'] text-gray-500">Upload Images</label>
+              <input id="images" name="images" type="file" accept="image/*" multiple @change="onFileChange"
+                class="block w-full rounded font-['kanit'] border-gray-300 bg-gray-50 py-3 px-4 pr-10 text-base text-gray-500 placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-300" />
             </div>
           </div>
         </div>
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          @click="addProduct()"
-        >
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="addProduct()">
           เพิ่มสินค้า
         </button>
         {{ newProduct }}
@@ -457,7 +353,7 @@ const products = ref([]);
 const addProduct = async () => {
   try {
     const config = useRuntimeConfig();
-    const response = await $fetch(config.public.baseURL + "s3/upload-image", {
+    const response = await $fetch(config.public.baseURL + "/s3/upload-image", {
       body: formData,
       header: {
         "Content-Type": "multipart/form-data",
@@ -472,6 +368,13 @@ const addProduct = async () => {
           body: newProduct.value,
         });
         fetchProduct();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Product add success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error.message);
       }
@@ -482,6 +385,13 @@ const addProduct = async () => {
           body: newProduct.value,
         });
         fetchProduct();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Product add success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error.message);
       }
@@ -583,9 +493,9 @@ const editProduct = async (data) => {
     try {
       await $api(
         data.type +
-          "s/updateGame/" +
-          "updateOrder" +
-          data.type.charAt(0).toUpperCase(),
+        "s/updateGame/" +
+        "updateOrder" +
+        data.type.charAt(0).toUpperCase(),
         {
           method: "PUT",
           body: {
