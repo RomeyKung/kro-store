@@ -1,32 +1,12 @@
 pipeline {
     agent any
-
     environment {
         REMOTE_HOST     = 'ubuntu@44.203.130.222'
         SSH_CREDENTIALS = 'keninstance'
         BASE_URL        = "http://44.203.130.222"
-        DOCKER_CREDENTIALS = credentials('dockerken')
     }
-    
     stages {
-        stage('copy repository') {
-            steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RomeyKung/kro-store.git']])
-
-            }  
-        }
-        stage('Build Image and Push to Docker Hub') {
-            steps {
-                script {
-                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
-                    sh 'docker build -t kenmurakii/kro-nginx:latest ./nginx'
-                    sh 'docker build -t kenmurakii/kro-nuxt:latest .'
-                    sh 'docker build -t kenmurakii/kro-golang:latest ./kro-backend'
-                    sh 'docker-compose push'
-                }
-            }
-        }
-        stage('Clear Environment') {
+         stage('Clear Environment') {
             steps {
                 sshagent([SSH_CREDENTIALS]) {
                     sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'rm -rf kro-store'"
@@ -36,21 +16,26 @@ pipeline {
                 }
             }
         }
-        stage('Docker Pull') {
+        stage('Clone Git on Remote Server') {
             steps {
                 sshagent([SSH_CREDENTIALS]) {
-                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker-compose pull'"
+                        sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'git clone https://github.com/RomeyKung/kro-store.git'"
+                        sh "ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} 'cd kro-store && echo BASE_URL=${BASE_URL} > .env'"
+                        sh "ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} 'cd kro-store/kro-backend && echo OMISE_PUBLIC_KEY=pkey_test_5yy91xv84zjnnitvdw0 > .env'"
+                        sh "ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} 'cd kro-store/kro-backend && echo OMISE_SECRET_KEY=skey_test_5wmco0oh1cfnliaoszv >> .env'"
+                        sh "ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} 'cd kro-store/kro-backend && echo SECRET_KEY=s_kroKey_back_i2tpohbojgagageq3u4ihryh >> .env'"
+
                 }
             }
         }
         stage('Build on Remote Server') {
             steps {
                 sshagent([SSH_CREDENTIALS]) {
-                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker-compose up -d'"
+                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'cd kro-store && docker-compose up -d --build'"
 
                 }
             }
         }
+
     }
 }
-
