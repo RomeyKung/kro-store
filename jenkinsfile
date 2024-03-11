@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        REMOTE_HOST     = 'ubuntu@44.203.130.222'
+        REMOTE_HOST     = 'ubuntu@54.83.145.197'
         SSH_CREDENTIALS = 'keninstance'
-        BASE_URL        = "http://44.203.130.222"
+        BASE_URL        = "http://54.83.145.197"
     }
     stages {
          stage('Clear Environment') {
