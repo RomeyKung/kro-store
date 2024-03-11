@@ -323,6 +323,10 @@ const payment = async (orders) => {
         token: tokenpayment.value,
         amount: totalAmount.value,
       },
+      headers: {
+      "Content-Type": 'application/json',
+      "Authorization": "bearer " + token.value
+      }
     });
     Swal.fire({
       title: "Success!",
