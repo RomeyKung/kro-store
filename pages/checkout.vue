@@ -272,6 +272,7 @@ const checkingCard = async () => {
       Quantity: item.quantity,
       Email: authStore.user.email,
       ShippingAddress: address,
+      OrderDate: "",
       ShippingMethod: shippingMethod.value,
       Type: item.type,
       Subtotal: item.price * item.quantity,
