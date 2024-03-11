@@ -457,7 +457,7 @@ const products = ref([]);
 const addProduct = async () => {
   try {
     const config = useRuntimeConfig();
-    const response = await $fetch(config.public.baseURL + "s3/upload-image", {
+    const response = await $api("s3/upload-image", {
       body: formData,
       header: {
         "Content-Type": "multipart/form-data",

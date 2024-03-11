@@ -6,7 +6,7 @@ pipeline {
         BASE_URL        = "http://44.203.130.222"
     }
     stages {
-         stage('Clear Environment') {
+        stage('Clear Environment') {
             steps {
                 sshagent([SSH_CREDENTIALS]) {
                     sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'rm -rf kro-store'"
