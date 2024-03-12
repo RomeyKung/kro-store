@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        REMOTE_HOST     = 'ubuntu@35.171.16.167'
+        REMOTE_HOST     = 'ubuntu@34.207.182.65'
         SSH_CREDENTIALS = 'keninstance'
-        BASE_URL        = "http://35.171.16.167"
+        BASE_URL        = "http://34.207.182.65"
         DOCKER_CREDENTIALS = credentials('dockerken')
     }
     
