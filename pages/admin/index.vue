@@ -61,7 +61,7 @@
             </td>
             <td class="font-['kanit'] border px-4 py-2">{{ item.type }}</td>
 
-            <template v-if="(item.type = 'game')">
+            <template v-if="(item.type == 'game')">
               <td class="font-['kanit'] border px-4 py-2">
                 <ul v-for="(genre, index) in item.genre" :key="index">
                   <li>{{ genre }}</li>
@@ -71,6 +71,12 @@
                 <ul v-for="(supDevice, index) in item.supDevice" :key="index">
                   <li>{{ supDevice }}</li>
                 </ul>
+              </td>
+            </template>
+            <template v-else>
+              <td class="font-['kanit'] border px-4 py-2">
+              </td>
+              <td class="font-['kanit'] border px-4 py-2">
               </td>
             </template>
 
