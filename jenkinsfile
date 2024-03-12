@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        REMOTE_HOST     = 'ubuntu@34.207.182.65'
+        REMOTE_HOST     = 'ubuntu@3.90.10.27'
         SSH_CREDENTIALS = 'keninstance'
-        BASE_URL        = "http://34.207.182.65"
+        BASE_URL        = "http://3.90.10.27"
         DOCKER_CREDENTIALS = credentials('dockerken')
     }
     
@@ -51,7 +51,7 @@ pipeline {
         stage('Build on Remote Server') {
             steps {
                 sshagent([SSH_CREDENTIALS]) {
-                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker-compose up -d'"
+                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker-compose up -d --build'"
 
                 }
             }
